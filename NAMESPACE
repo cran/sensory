@@ -3,4 +3,6 @@ import(gtools)
 import(MASS)
 S3method(summary, CUUimpute)
 S3method(print, CUUimpute)
+importFrom("stats", "cov", "cov.wt", "kmeans", "mahalanobis", "rnorm",
+             "runif", "sd", "weighted.mean")
 export(CUUimpute)

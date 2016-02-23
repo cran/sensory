@@ -17,7 +17,7 @@ print = TRUE)
 A numeric matrix.
 }
   \item{G}{
-A number or vectors indicating the number components to fit.
+A number or vector indicating the number components to fit.
 }
   \item{q}{
 A number or vector indicating the number of latent factors to fit.
@@ -56,7 +56,7 @@ Browne et al. (2013) developed a Progressive Expectation-Maximization (PEM) algo
 }
 \references{
 P.D. McNicholas and T.B. Murphy (2008). Parsimonious Gaussian Mixture Models. Statistics and Computing (18), 285-296.\cr
-Browne, R.P., P.D. McNicholas, and C.J. Findlay (2013).  A partial EM algorithm for clustering white breads. arXiv prerpeint arXiv:1302.6625.
+Browne, R.P., P.D. McNicholas, and C.J. Findlay (2013).  A partial EM algorithm for clustering white breads. arXiv preprint arXiv:1302.6625.
 }
 \author{
 Brian C. Franczak, Ryan P. Browne and Paul D. McNicholas \cr

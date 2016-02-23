@@ -362,10 +362,19 @@ gety2 <- function(data, gpar, ss){
 	}
 
 getu2 <- function(data, gpar, ss){
+	out <- list()
 	w <- weights(data=data, gpar=gpar, ss=ss)
+	u.g <- u.zg <- matrix(0, nrow=nrow(data), ncol=length(gpar$pi) ) 
 	u <- matrix(0, nrow=nrow(data), ncol=ncol(gpar[[1]]$lambda) )
-	for (i in 1:length(gpar$pi)) u = u + sweep(ss[[i]]$y,1,w[,i],"*") %*% gpar[[i]]$invS %*% (gpar[[i]]$lambda)   
-	return(u)
+	for (i in 1:length(gpar$pi)){ 
+		u.g[,i] <- (ss[[i]]$y-gpar[[i]]$mu) %*% gpar[[i]]$invS %*% (gpar[[i]]$lambda)
+		u.zg[,i] <- sweep(ss[[i]]$y-gpar[[i]]$mu,1,w[,i],"*") %*% gpar[[i]]$invS %*% (gpar[[i]]$lambda) # Change 1
+		u = u + sweep(ss[[i]]$y-gpar[[i]]$mu,1,w[,i],"*") %*% gpar[[i]]$invS %*% (gpar[[i]]$lambda)  # Change 2
+		}
+	out$u.g <- u.g
+	out$u.zg <- u.zg
+	out$u <- u
+	return(out)
 	}
 
 summary.NA.fact <- function(gpar) {
@@ -435,6 +444,7 @@ function(x, G=1:3, q=1:2, epsilon=1e-2, max.iter=10000, known=NULL, print=TRUE) 
 			iclresult$icl <- final.icl
 			iclresult$yhat <- gety2(data=x,gpar=fit[[g.icl]][[q.icl]]$gpar,ss=fit[[g.icl]][[q.icl]]$ss)
 			iclresult$u <- getu2(data=x,gpar=fit[[g.icl]][[q.icl]]$gpar,ss=fit[[g.icl]][[q.icl]]$ss)
+			print("*******")
 			iclresult$gpar <- summary.NA.fact(gpar=fit[[g.icl]][[q.icl]]$gpar)
 			iclresult$zig <- weights(data=x,gpar=fit[[g.icl]][[q.icl]]$gpar,ss=fit[[g.icl]][[q.icl]]$ss)
 			iclresult$map <- MAP(data=x,gpar=fit[[g.icl]][[q.icl]]$gpar,ss=fit[[g.icl]][[q.icl]]$ss)
@@ -446,9 +456,10 @@ function(x, G=1:3, q=1:2, epsilon=1e-2, max.iter=10000, known=NULL, print=TRUE) 
 			class.table <- table(true,map)
 			map <- iclresult$map
 			iclresult$class.table <- table(true,map)
-			val <- list( allbic=bic, bic=final.bic, G=ncol(zig), q=ncol(gpar$lambda), loglik=fit[[g.bic]][[q.bic]]$loglik, gpar=gpar, yhat=yhat, u=u, zig=zig, map=map, class.table=class.table, iclresult=iclresult )
+			val <- list( allbic=bic, bic=final.bic, G=ncol(zig), q=ncol(gpar$lambda), loglik=fit[[g.bic]][[q.bic]]$loglik, gpar=gpar, yhat=yhat, u=u$u, zig=zig, map=map, class.table=class.table, iclresult=iclresult )
 			}
-		else val <- list( allbic=bic, bic=final.bic, G=ncol(zig), q=ncol(gpar$lambda), loglik=fit[[g.bic]][[q.bic]]$loglik, gpar=gpar, yhat=yhat, u=u, zig=zig, map=map, iclresult=iclresult )
+		else val <- list( allbic=bic, bic=final.bic, G=ncol(zig), q=ncol(gpar$lambda), loglik=fit[[g.bic]][[q.bic]]$loglik, gpar=gpar, yhat=yhat, u=u$u, zig=zig, map=map, iclresult=iclresult )
+		print("********")
 		} else stop("It appears that not one of the mixtures was able to fit this data",call.=FALSE)
 	class(val) <- "CUUimpute"
 	val

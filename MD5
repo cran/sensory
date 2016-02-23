@@ -1,12 +1,12 @@
-0c3ae3fac46c61eb782f428aaca35bb0 *DESCRIPTION
-74d9bba7481919818b7918f362d24b15 *NAMESPACE
-420c63f6582c5835746ed3057fe83ae8 *R/sensory.R
+3c99154de5272b49f1325858d40d70c1 *DESCRIPTION
+199abd84f6e5ed5019666ae3dc15eea5 *NAMESPACE
+bb572d8537cbb029bd314576c75a66c4 *R/sensory.R
 298004993e1932cae8ac98a32296b48b *data/bbread.rda
 ccfddee83088568479365ebecd64c369 *data/datalist
 c75c00e6d84684db9810baacdf324c70 *data/iiris.rda
 b681fd1e1b1c9d8a535952f3774b4b43 *data/wbread.rda
-eef31d6c7c5afb02ec9f3f7e36f4c6b0 *man/CUUimpute.Rd
+7c23c887618bb48be2afa44c42d0b2bb *man/CUUimpute.Rd
 076efbd4533b1dc66e81558b367b2f3c *man/bbread.Rd
 0883641fdbd46a927bc2a94bde53d25b *man/iiris.Rd
-3de4706e804b4f1c347b841d110b8aa3 *man/sensory.Rd
+b7e55e87a3cd051b64719963ac7d0747 *man/sensory.Rd
 2a62c1c1477f37e344ccad4016ecea70 *man/wbread.Rd
